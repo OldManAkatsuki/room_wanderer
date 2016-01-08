@@ -1,0 +1,4 @@
+{ "name" : "Place Land",
+  "description" : "You are in the doorway.  To the east you can see the way to go.",
+  "neighbors" : { "e" : 2}
+}
