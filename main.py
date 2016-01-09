@@ -1,6 +1,5 @@
 import cmd
 from room import get_room
-import textwrap
 
 
 class Game(cmd.Cmd):
@@ -10,21 +9,15 @@ class Game(cmd.Cmd):
         cmd.Cmd.__init__(self)
 
         self.loc = get_room(1)
-        self.look()
+        self.loc.print_room()
 
     def move(self, direction):
-        newroom = self.loc._neighbors(direction)
+        newroom = self.loc.get_neighbor(direction)
         if newroom is None:
             print("you can't go this way")
         else:
             self.loc = get_room(newroom)
-            self.look()
-
-    def look(self):
-        print(self.loc.name)
-        print("")
-        for line in textwrap.wrap(self.loc.description, 74):
-            print(line)
+            self.loc.print_room()
 
     def do_up(self, args):
         """Go up"""

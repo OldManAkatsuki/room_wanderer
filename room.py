@@ -1,5 +1,6 @@
 import json
 import sqlite3
+from utilities import gprint, gprint_color
 
 
 def get_room(id):
@@ -24,20 +25,13 @@ class Room():
         self.description = description
         self.neighbors = neighbors
 
-    def _neighbors(self, direction):
+    def get_neighbor(self, direction):
         if direction in self.neighbors:
             return self.neighbors[direction]
         else:
             return None
 
-    def north(self):
-        return self._neighbor('n')
-
-    def south(self):
-        return self._neighbor('s')
-
-    def east(self):
-        return self._neighbor('e')
-
-    def west(self):
-        return self._neighbor('w')
+    def print_room(self):
+        gprint_color(self.name, 'bold_red_on_white')
+        print("")
+        gprint(self.description)
