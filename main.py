@@ -1,14 +1,15 @@
 import cmd
-from room import get_room
+from room import Room
+from utilities import term
 
 
 class Game(cmd.Cmd):
-    prompt = '^_^ >'
+    prompt = term.green_on_red('=>')
 
     def __init__(self):
         cmd.Cmd.__init__(self)
 
-        self.loc = get_room(1)
+        self.loc = Room.get_room(1)
         self.loc.print_room()
 
     def move(self, direction):
@@ -16,8 +17,13 @@ class Game(cmd.Cmd):
         if newroom is None:
             print("you can't go this way")
         else:
-            self.loc = get_room(newroom)
+            self.loc = Room.get_room(newroom)
             self.loc.print_room()
+        self.cust_prompt(self.loc.name)
+
+    # def cust_prompt(self, room_name):
+    #     with term.location(0, term.height - 1):
+    #         print('\nBrightPants (lvl4)\t10 hp\t15 mp {}'.format(room_name))
 
     def do_up(self, args):
         """Go up"""
