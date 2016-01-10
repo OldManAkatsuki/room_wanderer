@@ -3,22 +3,17 @@ import sqlite3
 from utilities import gprint, gprint_color
 
 
-def get_room(id):
-    ret = None
-
-    con = sqlite3.connect("game.db")
-
-    for row in con.execute("select json from rooms where id=?", (id,)):
-        jsontext = row[0]
-        d = json.loads(jsontext)
-        d['id'] = id
-        ret = Room(**d)
-        break
-
-    return ret
-
-
 class Room():
+
+    @staticmethod
+    def get_room(id):
+        con = sqlite3.connect("game.db")
+        for row in con.execute("select json from rooms where id=?", (id,)):
+            jsontext = row[0]
+            d = json.loads(jsontext)
+            d['id'] = id
+            return Room(**d)
+
     def __init__(self, id=0, name="A Room", description="An empty room", neighbors={}):
         self.id = id
         self.name = name
