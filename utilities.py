@@ -13,13 +13,9 @@ def gprint_format(text):
     return textwrap.indent(t.fill(text), '     ')
 
 
-def gprint(text):
-    print(gprint_format(text))
-
-
-def gprint_color(text, color=None):
+def gprint(text, color=None):
     if color:
         color_code = getattr(term, color, '')
-        gprint('{}{}{t.normal}'.format(color_code, text, t=term))
+        print(gprint_format('{}{}{t.normal}'.format(color_code, text, t=term)))
     else:
-        gprint(text)
+        print(gprint_format(text))

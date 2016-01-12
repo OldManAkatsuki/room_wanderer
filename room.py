@@ -1,6 +1,6 @@
 import json
 import sqlite3
-from utilities import gprint, gprint_color
+from utilities import gprint
 
 
 class Room():
@@ -27,6 +27,6 @@ class Room():
             return None
 
     def print_room(self):
-        gprint_color(self.name, 'bold_red_on_white')
+        gprint(self.name, 'bold_red_on_white')
         print("")
         gprint(self.description)
