@@ -9,11 +9,13 @@ def main(dbname, rooms_dir):
 
     con.execute("CREATE TABLE IF NOT EXISTS rooms(id INTEGER PRIMARY KEY, json TEXT NOT NULL)")
     con.commit()
+    cwd = os.path.cwd()
+    source = os.path.join(cwd, rooms_dir)
 
-    for filename in os.listdir(os.path.join('.', rooms_dir)):
+    for filename in os.listdir(source):
         base, extension = os.path.splitext(filename)
         if extension == '.json':
-            with open(os.path.join('.', rooms_dir, filename), 'r') as f:
+            with open(os.path.join(source, filename), 'r') as f:
                 json = f.read()
 
                 print("Inserting room {0}".format(int(base)))
