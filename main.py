@@ -1,6 +1,8 @@
 import cmd
 from room import Room
 from utilities import term
+import shutil
+import tempfile
 
 
 class Game(cmd.Cmd):
@@ -11,6 +13,8 @@ class Game(cmd.Cmd):
 
         self.loc = Room.get_room(1)
         self.loc.print_room()
+        self.dbfile = tempfile.mktemp()
+        shutil.copyfile("game.db", self.dbfile)
 
     def move(self, direction):
         newroom = self.loc.get_neighbor(direction)
@@ -19,11 +23,6 @@ class Game(cmd.Cmd):
         else:
             self.loc = Room.get_room(newroom)
             self.loc.print_room()
-        self.cust_prompt(self.loc.name)
-
-    # def cust_prompt(self, room_name):
-    #     with term.location(0, term.height - 1):
-    #         print('\nBrightPants (lvl4)\t10 hp\t15 mp {}'.format(room_name))
 
     def do_up(self, args):
         """Go up"""
@@ -54,6 +53,10 @@ class Game(cmd.Cmd):
         print("Thank you for playing")
         return True
 
+    def do_save(self, args):
+        """save the game"""
+        shutil.copyfile(self.dbfile, args)
+        print("The game was saved to {}".format(args))
 
 if __name__ == "__main__":
     g = Game()
