@@ -14,11 +14,12 @@ class Room():
             d['id'] = id
             return Room(**d)
 
-    def __init__(self, id=0, name="A Room", description="An empty room", neighbors={}):
+    def __init__(self, id=0, name="A Room", description="An empty room", neighbors={}, items=[]):
         self.id = id
         self.name = name
         self.description = description
         self.neighbors = neighbors
+        self.items = items
 
     def get_neighbor(self, direction):
         if direction in self.neighbors:
@@ -30,3 +31,7 @@ class Room():
         gprint(self.name, 'bold_red_on_white')
         print("")
         gprint(self.description)
+        print("")
+        gprint('items:')
+        for item in self.items:
+            gprint('\t{}'.format(item))

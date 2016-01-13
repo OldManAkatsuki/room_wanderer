@@ -9,7 +9,7 @@ def main(dbname, items_dir):
 
     con.execute("CREATE TABLE IF NOT EXISTS items(id INTEGER PRIMARY KEY, name TEXT NOT NULL, json TEXT NOT NULL)")
     con.commit()
-    cwd = os.path.cwd()
+    cwd = '.'
     source = os.path.join(cwd, items_dir)
 
     for filename in os.listdir(source):
@@ -18,10 +18,10 @@ def main(dbname, items_dir):
             with open(os.path.join(source, filename), 'r') as f:
                 json = f.read()
 
-                print("Inserting item {0}".format(int(base)))
+                print("Inserting item {0}".format(base))
 
-                con.execute("INSERT OR REPLACE INTO items(id, json) VALUES(?, ?);",
-                            (int(base), json))
+                con.execute("INSERT OR REPLACE INTO items(name, json) VALUES(?, ?);",
+                            (base, json))
 
                 con.commit()
 

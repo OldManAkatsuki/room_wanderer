@@ -9,7 +9,7 @@ def main(dbname, rooms_dir):
 
     con.execute("CREATE TABLE IF NOT EXISTS rooms(id INTEGER PRIMARY KEY, json TEXT NOT NULL)")
     con.commit()
-    cwd = os.path.cwd()
+    cwd = '.'
     source = os.path.join(cwd, rooms_dir)
 
     for filename in os.listdir(source):

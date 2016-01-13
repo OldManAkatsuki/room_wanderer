@@ -1,12 +1,12 @@
 import cmd
 from room import Room
-from utilities import term
+# from utilities import term
 import shutil
 import tempfile
 
 
 class Game(cmd.Cmd):
-    prompt = term.green_on_red('=>')
+    prompt = '=>'   # term.green_on_red('=>')
 
     def __init__(self):
         cmd.Cmd.__init__(self)
