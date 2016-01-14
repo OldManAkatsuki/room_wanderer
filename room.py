@@ -6,15 +6,14 @@ from item import Item
 
 class Room():
 
-    cursor = sqlite3.connect("game.db").cursor()
-
-    @classmethod
-    def get_room(self, id):
-        for row in self.cursor.execute("select json from rooms where id=?", (id,)):
-            jsontext = row[0]
-            d = json.loads(jsontext)
-            d['id'] = id
-            return Room(**d)
+    @staticmethod
+    def get_room(id):
+        con = sqlite3.connect("game.db")
+        jsontext = con.execute("select json from rooms where id=?", (id,)).fetchone()[0]
+        con.close()
+        d = json.loads(jsontext)
+        d['id'] = id
+        return Room(**d)
 
     def __init__(self, id=0, name="A Room", description="An empty room", neighbors={}, items=[]):
         self.id = id
