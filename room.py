@@ -1,14 +1,16 @@
 import json
 import sqlite3
 from utilities import gprint
+from item import Item
 
 
 class Room():
 
-    @staticmethod
-    def get_room(id):
-        con = sqlite3.connect("game.db")
-        for row in con.execute("select json from rooms where id=?", (id,)):
+    cursor = sqlite3.connect("game.db").cursor()
+
+    @classmethod
+    def get_room(self, id):
+        for row in self.cursor.execute("select json from rooms where id=?", (id,)):
             jsontext = row[0]
             d = json.loads(jsontext)
             d['id'] = id
@@ -34,4 +36,4 @@ class Room():
         print("")
         gprint('items:')
         for item in self.items:
-            gprint('\t{}'.format(item))
+            Item.get_item(item).print_item()
