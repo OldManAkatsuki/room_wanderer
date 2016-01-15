@@ -1,0 +1,25 @@
+                            
+
+        13 (bathroom)        16 (master)
+                |                  |
+        10 (top of stairs) - 15 (hall)
+                |                  |
+        14 (Aaron)           17 (Nicole)        
+
+
+
+
+
+                                                        11 (back deck)
+                                                            |
+                                          12 (garage) - 9 (dining room)------------------- 7 (kitchen)
+                                                            |                                      |
+                      10 (UPSTAIRS)----                     |                                      |
+                                       \                    |                                      |     
+                                        \               5 (hall) - 8 (bathroom)                    |    
+                                         \                  |                                      |
+                                         6 (landing) -  3 (enterance) --------------------- 4( living room)
+                                                            |
+                                                        2 (front door)
+                                                            |
+                                                        1 (sidewalk)
