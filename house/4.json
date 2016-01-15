@@ -1,0 +1,5 @@
+{ "name": "Living Room",
+    "description": "You are standing in the living room. There is a couch and loveseat, as well as a TV set. Laying down on the couch you can see Oscar the cat. To the north is the kitchen.",
+    "neighbors": {"w": 3, "n": 7},
+    "items": ["Oscar_the_cat", "couch", "loveseat"]
+}

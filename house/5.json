@@ -1,0 +1,5 @@
+{ "name": "Hallway",
+    "description": "You are in a sparsely decorated hallway. There are a few pictures on the left side of the wall. To your right is a small bathroom. Ahead of you is the dining room.",
+    "neighbors": {"s": 3, "e": 8, "n": 9},
+    "items": ["pictures"]
+}

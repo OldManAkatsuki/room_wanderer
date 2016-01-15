@@ -1,0 +1,5 @@
+{ "name": "Kitchen",
+    "description": "You are standing in a moderate sized kitchen with a lot of space for it's size. There is a plate of cookies sitting on the counter. To the west is the dining room.",
+    "neighbors": {"s": 4, "w": 9},
+    "items": ["cookies"]
+}

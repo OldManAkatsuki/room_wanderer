@@ -1,0 +1,5 @@
+{ "name": "Background Deck",
+    "description": "You are standing outside on a deck with a view of the backyard. To your right are a grill and patio table. From where you are standing you can see a garden on the far side of the yard. Behind you is the door leading back inside.",
+    "neighbors": {"s": 9},
+    "items": ["grill", "patio_set"]
+}

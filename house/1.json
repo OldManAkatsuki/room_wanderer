@@ -1,0 +1,4 @@
+{ "name": "Sidewalk",
+    "description": "You are standing on a sidewalk. To your right and and left it extends endlessly. In front of you is the front door of your house.",
+    "neighbors": {"n" : 2}
+}

@@ -1,0 +1,5 @@
+{ "name": "Nicole's Bedroom",
+    "description": "You have never seen so much pink and purple in your life. You would have to be blind to not tell that this is a girl's bedroom. From the decorations in the room you can tell this room's owner loves dancing. On the northern wall is the door back to the hallway.",
+    "neighbors": {"n": 15},
+    "items": ["dancing_shoes"]
+}

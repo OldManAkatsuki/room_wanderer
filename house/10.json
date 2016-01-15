@@ -1,0 +1,4 @@
+{ "name": "Top of the Stairs",
+    "description": "You are standing at the top of the stairs. To the south lies a door marked Aaron. To the north is an open door with another bathroom. To the east is more hallway with additional rooms.",
+    "neighbors": {"down": 6, "n": 13, "s": 14, "e": 15}
+}

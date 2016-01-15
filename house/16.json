@@ -1,0 +1,5 @@
+{ "name": "Master Bedroom",
+    "description": "You are in a decently sized master bedroom. While furnished, there is not very much personalization that you can see. To the south is the door leading back to the hallway.",
+    "neighbors": {"s": 15},
+    "items": ["van_keys"]
+}

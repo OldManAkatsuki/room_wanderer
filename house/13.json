@@ -1,0 +1,4 @@
+{ "name": "Upstairs Bathroom",
+    "description": "You are in a moderatly sized bathroom. There is a bathtub/shower combination. There is also a sink and toilet on the opposite wall.",
+    "neighbors": {"s": 10}
+}

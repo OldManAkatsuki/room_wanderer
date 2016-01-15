@@ -1,0 +1,5 @@
+{ "name": "Dining Room",
+    "description": "You are standing in a dining room with a table and chairs big enough to seat 8 comfortably. To the north is a sliding glass door leading to a deck. To the east lies the kitchen. To the west is a door leading to the garage. The south has a hallway leading to the front door.",
+    "neighbors": {"n": 11, "w": 12, "e": 7, "s": 5},
+    "items": ["table"]
+}

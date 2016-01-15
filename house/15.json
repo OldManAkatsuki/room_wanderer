@@ -1,0 +1,4 @@
+{ "name": "Upstairs Hallway",
+    "description": "You are in the upstairs hallway. Other then the doors to the north and south there is nothing here.",
+    "neighbors": {"w": 10, "n": 16, "s": 17}
+}

@@ -1,0 +1,5 @@
+{ "name": "Aaron's Room",
+    "description": "You are standing in what is clearly a boy's bedroom. In the space that the bed does not occupy lies various storage items coverd in various combinations of Star wars toys, Legos, and different sport's teams memorabilia. There is a door on the north wall leading back to the hallway you just came from.",
+    "neighbors": {"n": 10},
+    "items": ["baseball_bat"]
+}

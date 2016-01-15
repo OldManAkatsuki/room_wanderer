@@ -1,0 +1,5 @@
+{ "name": "Garage",
+    "description": "You are standing in an attached garage big enough for a van, while still having plenty of storage. Behind you to the east is the door heading back inside.",
+    "neighbors": {"e": 9},
+    "items": ["van"]
+}

@@ -1,0 +1,4 @@
+{ "name": "Landing",
+    "description": "There is very little in the way of decoration here, consisting of only a window to the front of the house. Opposite the window are the stairs are stairs heading up.",
+    "neighbors": {"e": 3, "up": 10}
+}

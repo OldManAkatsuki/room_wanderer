@@ -1,0 +1,5 @@
+{ "name": "Entryway",
+    "description": "You are standing in front of the door leading outside. To your left is a small landing that leads to the stairs going up. In front of you is a short hallway. To your right is the living room. There is a small pile of shoes next to the door.",
+    "neighbors": {"w": 6, "n": 5, "e": 4, "s": 2},
+    "items": ["shoes"]
+}

@@ -1,0 +1,4 @@
+{ "name": "Bathroom",
+    "description": "You are standing in a small bathroom, with only a sink and toilet. To the west is the hallway you just came from.",
+    "neighbors": {"w": 5}
+}
