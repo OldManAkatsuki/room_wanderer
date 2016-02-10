@@ -8,7 +8,7 @@ import sqlite3
 
 class ItemTests(unittest.TestCase):
 
-    def test_creat_item_with_defaults(self):
+    def test_create_item_with_defaults(self):
         item = Item()
         self.assertEqual(item.name, None)
         self.assertEqual(item.description, None)
