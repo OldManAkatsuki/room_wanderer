@@ -1,16 +1,15 @@
 import json
-import sqlite3
-from utilities import gprint
+
+import constants
 from item import Item
+from utilities import gprint
 
 
 class Room():
 
     @staticmethod
     def get_room(id):
-        con = sqlite3.connect("game.db")
-        jsontext = con.execute("select json from rooms where id=?", (id,)).fetchone()[0]
-        con.close()
+        jsontext = constants.DATABASE.execute("select json from rooms where id=?", (id,)).fetchone()[0]
         d = json.loads(jsontext)
         d['id'] = id
         return Room(**d)
@@ -36,3 +35,13 @@ class Room():
         gprint('items:')
         for item in self.items:
             Item.get_item(item).print_item()
+
+    def save(self):
+        room_json = json.dumps({
+            'name': self.name,
+            'description': self.description,
+            'neighbors': self.neighbors,
+            'items': self.items
+        })
+        constants.DATABASE.execute("INSERT OR REPLACE INTO rooms(id, json) VALUES(?, ?);", (self.id, room_json))
+        constants.DATABASE.commit()

@@ -1,20 +1,30 @@
 import cmd
-from room import Room
-from utilities import term
+import sqlite3
 # import shutil
 # import tempfile
+
+from character import Character
+import constants
+from room import Room
+from utilities import term
 
 
 class Game(cmd.Cmd):
     prompt = term.green_on_red('=>')
 
-    def __init__(self):
+    def __init__(self, db=None, dbfile='game.db'):
         cmd.Cmd.__init__(self)
 
+        if not db:
+            constants.DATABASE = sqlite3.connect(dbfile)
+        else:
+            constants.DATABASE = db
+
+        self.character = Character()
         self.loc = Room.get_room(1)
         self.loc.print_room()
         # self.dbfile = tempfile.mktemp()
-        # shutil.copyfile("game.db", self.dbfile)
+        # shutil.copyfile(self.db, self.dbfile)
 
     def move(self, direction):
         newroom = self.loc.get_neighbor(direction)

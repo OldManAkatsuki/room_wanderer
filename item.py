@@ -1,16 +1,14 @@
 import json
-import sqlite3
+
+import constants
 from utilities import gprint
 
 
 class Item():
 
     @staticmethod
-    def get_item(name, con=None, db_file='game.db'):
-        if not con:
-            con = sqlite3.connect(db_file)
-        jsontext = con.execute("select json from items where name=?", (name,)).fetchone()[0]
-        con.close()
+    def get_item(name):
+        jsontext = constants.DATABASE.execute("select json from items where name=?", (name,)).fetchone()[0]
         d = json.loads(jsontext)
         return Item(**d)
 
