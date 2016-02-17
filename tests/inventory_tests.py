@@ -12,8 +12,8 @@ class InventoryIntegrationTests(unittest.TestCase):
 
     def test_get_item_from_room_adds_to_inventory_and_removes_from_room(self):
         con = sqlite3.connect(':memory:')
-        self.create_room(con)
-        self.create_item(con)
+        self.create_room(con, items=['BFG9000'])
+        self.create_item(con, name='BFG9000')
         output = StringIO()
         with redirect_stdout(output):
             game = Game(db=con)
@@ -34,22 +34,47 @@ class InventoryIntegrationTests(unittest.TestCase):
         room = Room.get_room(1)
         self.assertEqual(room.items, [])
 
-    def create_room(self, con):
+    def test_put_item_in_room_removes_from_inventory_and_adds_to_room(self):
+        con = sqlite3.connect(':memory:')
+        self.create_room(con, items=[])
+        self.create_item(con, name='BFG9000')
+        output = StringIO()
+        with redirect_stdout(output):
+            game = Game(db=con)
+        game.character.inventory = ['BFG9000']
+        # room in database has item persisted
+        room = Room.get_room(1)
+        self.assertEqual(room.items, [])
+        # inventory has our item
+        self.assertEqual(game.character.inventory, ['BFG9000'])
+        # room in game object has items fetched from db
+        self.assertEqual(game.loc.items, [])
+        # take item from inventory, add to room
+        game.character.put_in_room(game.loc, 'BFG9000')
+        # character's inventory now is empty
+        self.assertEqual(game.character.inventory, [])
+        # room in game object now has item
+        self.assertEqual(game.loc.items, ['BFG9000'])
+        # room in database is persisted withitem
+        room = Room.get_room(1)
+        self.assertEqual(room.items, ['BFG9000'])
+
+    def create_room(self, con, items=[]):
         room_json = json.dumps({
             'name': 'room1',
             'description': 'test room',
             'neighbors': {},
-            'items': ['BFG9000']
+            'items': items
         })
         con.execute("CREATE TABLE IF NOT EXISTS rooms(id INTEGER PRIMARY KEY, json TEXT NOT NULL)")
         con.commit()
         con.execute("INSERT OR REPLACE INTO rooms(id, json) VALUES(?, ?);", (1, room_json))
         con.commit()
 
-    def create_item(self, con):
-        file_name = 'BFG9000'
+    def create_item(self, con, name='item'):
+        file_name = name
         item_json = json.dumps({
-            'name': 'BFG9000',
+            'name': name,
             'description': 'cute'
         })
         con.execute("CREATE TABLE IF NOT EXISTS items(id INTEGER PRIMARY KEY, name TEXT NOT NULL, json TEXT NOT NULL)")
