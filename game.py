@@ -63,6 +63,14 @@ class Game(cmd.Cmd):
         print("Thank you for playing")
         return True
 
+    def do_take(self, args):
+        """Takes an item from room and adds it to inventory"""
+        self.character.take_from_room(self.loc, args)
+
+    def do_put(self, args):
+        """Drop item from inventory into room"""
+        self.character.put_in_room(self.loc, args)
+
     # def do_save(self, args):
     #     """save the game"""
     #     shutil.copyfile(self.dbfile, args)
