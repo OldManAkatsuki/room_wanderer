@@ -4,11 +4,17 @@ class Character(object):
         self.inventory = []
 
     def take_from_room(self, room, thing):
-        self.inventory.append(thing)
-        room.items.remove(thing)
+        try:
+            self.inventory.append(thing)
+            room.items.remove(thing)
+        except ValueError:
+            print("You cannot take that.")
         room.save()
 
     def put_in_room(self, room, thing):
-        room.items.append(thing)
+        try:
+            room.items.append(thing)
+            self.inventory.remove(thing)
+        except ValueError:
+            print("You do not have that.")
         room.save()
-        self.inventory.remove(thing)

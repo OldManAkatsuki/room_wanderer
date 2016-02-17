@@ -67,9 +67,13 @@ class Game(cmd.Cmd):
         """Takes an item from room and adds it to inventory"""
         self.character.take_from_room(self.loc, args)
 
-    def do_put(self, args):
+    def do_drop(self, args):
         """Drop item from inventory into room"""
         self.character.put_in_room(self.loc, args)
+
+    def do_look(self, args):
+        if args == 'room':
+            self.loc.print_room()
 
     # def do_save(self, args):
     #     """save the game"""

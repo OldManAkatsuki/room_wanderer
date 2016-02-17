@@ -34,6 +34,17 @@ class InventoryIntegrationTests(unittest.TestCase):
         room = Room.get_room(1)
         self.assertEqual(room.items, [])
 
+    def test_cannot_take_item_that_does_not_exist(self):
+        con = sqlite3.connect(':memory:')
+        self.create_room(con, items=['BFG9000'])
+        self.create_item(con, name='BFG9000')
+        with redirect_stdout(StringIO()):
+            game = Game(db=con)
+        output = StringIO()
+        with redirect_stdout(output):
+            game.character.take_from_room(game.loc, 'cat')
+        self.assertEqual(output.getvalue(), 'You cannot take that.\n')
+
     def test_put_item_in_room_removes_from_inventory_and_adds_to_room(self):
         con = sqlite3.connect(':memory:')
         self.create_room(con, items=[])
@@ -58,6 +69,17 @@ class InventoryIntegrationTests(unittest.TestCase):
         # room in database is persisted withitem
         room = Room.get_room(1)
         self.assertEqual(room.items, ['BFG9000'])
+
+    def test_cannot_drop_an_item_that_you_do_not_have(self):
+        con = sqlite3.connect(':memory:')
+        self.create_room(con, items=[])
+        self.create_item(con, name='BFG9000')
+        with redirect_stdout(StringIO()):
+            game = Game(db=con)
+        output = StringIO()
+        with redirect_stdout(output):
+            game.character.put_in_room(game.loc, 'BFG9000 cat')
+        self.assertEqual(output.getvalue(), 'You do not have that.\n')
 
     def create_room(self, con, items=[]):
         room_json = json.dumps({
