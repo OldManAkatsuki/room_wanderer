@@ -75,6 +75,9 @@ class Game(cmd.Cmd):
         if args == 'room':
             self.loc.print_room()
 
+    def do_inv(self, args):
+        self.character.show_inventory()
+
     # def do_save(self, args):
     #     """save the game"""
     #     shutil.copyfile(self.dbfile, args)
