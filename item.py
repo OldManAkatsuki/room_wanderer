@@ -1,7 +1,7 @@
 import json
 
 import constants
-from utilities import gprint
+from utilities import gprint, gprint_colorize
 
 
 class Item():
@@ -17,4 +17,10 @@ class Item():
         self.description = description
 
     def print_item(self):
-        gprint('{}: {}'.format(self.name, self.description))
+        name = gprint_colorize(self.name, color='blue')
+        gprint('{}: {}'.format(name, self.description))
+
+    @property
+    def string(self):
+        name = gprint_colorize(self.name, color='blue')
+        return '{}: {}'.format(name, self.description)

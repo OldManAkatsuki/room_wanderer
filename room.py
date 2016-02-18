@@ -28,13 +28,17 @@ class Room():
             return None
 
     def print_room(self):
-        gprint(self.name, 'bold_red_on_white')
+        gprint(self.name, color='bold_red_on_white')
         print("")
         gprint(self.description)
-        print("")
-        gprint('items:')
-        for item in self.items:
-            Item.get_item(item).print_item()
+        if self.items:
+            print("")
+            gprint('You see the following items:')
+            for item in self.items:
+                gprint(Item.get_item(item).string, indent=2)
+        if self.neighbors:
+            print("")
+            gprint('Exits: {}'.format(sorted(list(self.neighbors.keys()))))
 
     def save(self):
         room_json = json.dumps({
