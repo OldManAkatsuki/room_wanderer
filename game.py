@@ -6,11 +6,11 @@ import sqlite3
 from character import Character
 import constants
 from room import Room
-# from utilities import term
+from utilities import term
 
 
 class Game(cmd.Cmd):
-    prompt = '=>'   # term.green_on_red('=>')
+    prompt = term.green_on_red('=>')
 
     def __init__(self, db=None, dbfile='game.db'):
         cmd.Cmd.__init__(self)
