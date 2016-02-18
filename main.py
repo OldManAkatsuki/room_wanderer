@@ -1,20 +1,20 @@
 import cmd
 from room import Room
-# from utilities import term
-import shutil
-import tempfile
+from utilities import term
+# import shutil
+# import tempfile
 
 
 class Game(cmd.Cmd):
-    prompt = '=>'   # term.green_on_red('=>')
+    prompt = term.green_on_red('=>')
 
     def __init__(self):
         cmd.Cmd.__init__(self)
 
         self.loc = Room.get_room(1)
         self.loc.print_room()
-        self.dbfile = tempfile.mktemp()
-        shutil.copyfile("game.db", self.dbfile)
+        # self.dbfile = tempfile.mktemp()
+        # shutil.copyfile("game.db", self.dbfile)
 
     def move(self, direction):
         newroom = self.loc.get_neighbor(direction)
@@ -53,10 +53,10 @@ class Game(cmd.Cmd):
         print("Thank you for playing")
         return True
 
-    def do_save(self, args):
-        """save the game"""
-        shutil.copyfile(self.dbfile, args)
-        print("The game was saved to {}".format(args))
+    # def do_save(self, args):
+    #     """save the game"""
+    #     shutil.copyfile(self.dbfile, args)
+    #     print("The game was saved to {}".format(args))
 
 if __name__ == "__main__":
     g = Game()
