@@ -1,7 +1,7 @@
 import cmd
 import sqlite3
-# import shutil
-# import tempfile
+import shutil
+import tempfile
 
 from character import Character
 import constants
@@ -12,19 +12,12 @@ from utilities import term
 class Game(cmd.Cmd):
     prompt = term.green_on_red('=>')
 
-    def __init__(self, db=None, dbfile='game.db'):
+    def __init__(self, db=None, dbfile='../db/game.db'):
         cmd.Cmd.__init__(self)
-
-        if not db:
-            constants.DATABASE = sqlite3.connect(dbfile)
-        else:
-            constants.DATABASE = db
 
         self.character = Character()
         self.loc = Room.get_room(1)
         self.loc.print_room()
-        # self.dbfile = tempfile.mktemp()
-        # shutil.copyfile(self.db, self.dbfile)
 
     def move(self, direction):
         newroom = self.loc.get_neighbor(direction)
@@ -78,11 +71,18 @@ class Game(cmd.Cmd):
     def do_inv(self, args):
         self.character.show_inventory()
 
-    # def do_save(self, args):
-    #     """save the game"""
-    #     shutil.copyfile(self.dbfile, args)
-    #     print("The game was saved to {}".format(args))
+    def do_save(self, args):
+        """save the game"""
+        save_path = '../saves/{}'.format(args)
+        shutil.copyfile(constants.DBFILE, save_path)
+        print("The game was saved to {}".format(save_path))
 
 if __name__ == "__main__":
+    dbfile_path = '../db/game.db'
+    constants.DBFILE = tempfile.mktemp()
+    shutil.copyfile(dbfile_path, constants.DBFILE)
+
+    constants.DATABASE = sqlite3.connect(constants.DBFILE)
+
     g = Game()
     g.cmdloop()
