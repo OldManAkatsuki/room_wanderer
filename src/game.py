@@ -1,4 +1,5 @@
 import cmd
+import os
 import sqlite3
 import shutil
 import tempfile
@@ -78,7 +79,17 @@ class Game(cmd.Cmd):
         print("The game was saved to {}".format(save_path))
 
 if __name__ == "__main__":
-    dbfile_path = '../db/game.db'
+    saves = os.listdir('../saves')
+    game_file = '../db/game.db'
+    if saves:
+        print('Do you wish to restore a saved game?')
+        print('N: Start a new game.')
+        for idx, save in enumerate(saves, 1):
+            print('{}:  {}'.format(idx, save))
+            load = input("\nEnter save number or 'N' for a new game: ").upper()
+        game_file = '../saves/{}'.format(saves[int(load) - 1]) if load != 'N' else game_file
+
+    dbfile_path = game_file
     constants.DBFILE = tempfile.mktemp()
     shutil.copyfile(dbfile_path, constants.DBFILE)
 
