@@ -10,23 +10,27 @@ from room import Room
 from utilities import term
 
 
-class Game(cmd.Cmd):
-    prompt = term.green_on_red('=>')
+class Game(object):
 
-    def __init__(self, db=None, dbfile='../db/game.db'):
-        cmd.Cmd.__init__(self)
-
+    def __init__(self):
         self.character = Character()
         self.loc = Room.get_room(1)
         self.loc.print_room()
 
+
+class Commands(cmd.Cmd):
+    prompt = term.green_on_red('=>')
+
+    def __init__(self):
+        cmd.Cmd.__init__(self)
+
     def move(self, direction):
-        newroom = self.loc.get_neighbor(direction)
+        newroom = constants.GAME.loc.get_neighbor(direction)
         if newroom is None:
             print("you can't go this way")
         else:
-            self.loc = Room.get_room(newroom)
-            self.loc.print_room()
+            constants.GAME.loc = Room.get_room(newroom)
+            constants.GAME.loc.print_room()
 
     def do_up(self, args):
         """Go up"""
@@ -59,18 +63,18 @@ class Game(cmd.Cmd):
 
     def do_take(self, args):
         """Takes an item from room and adds it to inventory"""
-        self.character.take_from_room(self.loc, args)
+        constants.GAME.character.take_from_room(constants.GAME.loc, args)
 
     def do_drop(self, args):
         """Drop item from inventory into room"""
-        self.character.put_in_room(self.loc, args)
+        constants.GAME.character.put_in_room(constants.GAME.loc, args)
 
     def do_look(self, args):
         if args == 'room':
-            self.loc.print_room()
+            constants.GAME.loc.print_room()
 
     def do_inv(self, args):
-        self.character.show_inventory()
+        constants.GAME.character.show_inventory()
 
     def do_save(self, args):
         """save the game"""
@@ -109,5 +113,6 @@ def load_database():
 
 if __name__ == "__main__":
     load_database()
-    g = Game()
-    g.cmdloop()
+    constants.GAME = Game()
+    c = Commands()
+    c.cmdloop()
