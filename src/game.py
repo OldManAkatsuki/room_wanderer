@@ -78,6 +78,7 @@ class Game(cmd.Cmd):
         shutil.copyfile(constants.DBFILE, save_path)
         print("The game was saved to {}".format(save_path))
 
+
 def prompt_load_game(number_of_saves):
     choice = None
     choices = [str(x + 1) for x in range(number_of_saves)]
@@ -86,6 +87,7 @@ def prompt_load_game(number_of_saves):
     while choice not in choices:
         choice = input("\nEnter save number or 'N' for a new game: ").upper()
     return choice
+
 
 def load_database():
     saves = os.listdir('../saves')
