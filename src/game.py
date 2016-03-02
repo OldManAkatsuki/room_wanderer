@@ -78,7 +78,16 @@ class Game(cmd.Cmd):
         shutil.copyfile(constants.DBFILE, save_path)
         print("The game was saved to {}".format(save_path))
 
-if __name__ == "__main__":
+def prompt_load_game(number_of_saves):
+    choice = None
+    choices = [str(x + 1) for x in range(number_of_saves)]
+    choices.append('N')
+    print(choices)
+    while choice not in choices:
+        choice = input("\nEnter save number or 'N' for a new game: ").upper()
+    return choice
+
+def load_database():
     saves = os.listdir('../saves')
     game_file = '../db/game.db'
     if saves:
@@ -86,7 +95,7 @@ if __name__ == "__main__":
         print('N: Start a new game.')
         for idx, save in enumerate(saves, 1):
             print('{}:  {}'.format(idx, save))
-            load = input("\nEnter save number or 'N' for a new game: ").upper()
+        load = prompt_load_game(len(saves))
         game_file = '../saves/{}'.format(saves[int(load) - 1]) if load != 'N' else game_file
 
     dbfile_path = game_file
@@ -95,5 +104,8 @@ if __name__ == "__main__":
 
     constants.DATABASE = sqlite3.connect(constants.DBFILE)
 
+
+if __name__ == "__main__":
+    load_database()
     g = Game()
     g.cmdloop()
