@@ -15,25 +15,26 @@ item_path = os.path.relpath('../data/items_new')
 ITEM_NAMES = []
 ITEMS = {}
 
+
 def current_items():
     files = []
     for (dirpath, dirnames, filenames) in os.walk(item_path):
         files.extend(filenames)
         break
-    for path in files: 
+    for path in files:
         with open(os.path.join(item_path, path), "r") as f:
             file_data = json.loads(f.read())
         ITEMS[file_data["name"]] = (path, file_data)
-    ITEM_NAMES.extend(sorted(ITEMS.keys()))  
+    ITEM_NAMES.extend(sorted(ITEMS.keys()))
 
 
 def show_details():
     choice = int(input('What item do you want details for? >>'))
     item = ITEMS[ITEM_NAMES[choice - 1]]
-    print('{:>20}: {}'.format('Name', item[1]['name']))    
-    print('{:>20}: {}'.format('Short Description', item[1]['short_description'])) 
-    print('{:>20}: {}'.format('Long Description',item[1]['long_description']))
-    print('{:>20}: {}'.format('Filename', item[0]))  
+    print('{:>20}: {}'.format('Name', item[1]['name']))
+    print('{:>20}: {}'.format('Short Description', item[1]['short_description']))
+    print('{:>20}: {}'.format('Long Description', item[1]['long_description']))
+    print('{:>20}: {}'.format('Filename', item[0]))
 
 
 def display_current_items():
@@ -59,7 +60,7 @@ def get_item_info():
 def confirm_entry(data):
     print('\n\n')
     print('The item you entered: ')
-    print(json_data)
+    print(data)
     confirm = None
     while confirm not in ['Y', 'N']:
         confirm = input('\nIs this correct? (y/n) >').upper()
@@ -95,4 +96,3 @@ ACTIONS = [
 
 current_items()
 menu()
-
